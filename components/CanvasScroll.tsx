@@ -123,7 +123,7 @@ const createWhiteMaterial = (brightness: number, roughness: number, textureScale
     canvas.width = 1024;
     canvas.height = 1024;
     const ctx = canvas.getContext('2d')!;
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = '#0a0a0aff';
     ctx.fillRect(0, 0, 1024, 1024);
 
     ctx.globalAlpha = 0.015;
@@ -682,31 +682,6 @@ export default function InteractiveOldPC() {
                 </div>
             </div>
 
-            {/* Button hint overlay */}
-            <div className={`fixed top-1/2 left-4 z-30 transform -translate-y-1/2 transition-opacity duration-500 ${arrowRef.current?.visible === false ? 'opacity-0' : 'opacity-100'
-                }`}>
-                <div className={`backdrop-blur-xl px-4 py-3 rounded-r-xl border-l-4 ${darkMode
-                    ? 'bg-black/40 border-gray-600'
-                    : 'bg-white/40 border-gray-400'
-                    }`}>
-                    <div className="flex items-center space-x-3">
-                        <div className={`animate-bounce ${darkMode ? 'text-gray-300' : 'text-gray-700'
-                            }`}>
-                            →
-                        </div>
-                        <div>
-                            <p className={`text-sm font-medium ${darkMode ? 'text-gray-200' : 'text-gray-800'
-                                }`}>
-                                Click white button
-                            </p>
-                            <p className={`text-xs ${darkMode ? 'text-gray-400' : 'text-gray-600'
-                                }`}>
-                                Switch to {darkMode ? 'light' : 'dark'} mode
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             {/* Scroll space */}
             <div className="h-[250vh]" />
@@ -714,73 +689,7 @@ export default function InteractiveOldPC() {
             {/* Pinned Scene Container */}
             <div ref={containerRef} className="fixed top-0 left-0 w-full h-screen z-20" />
 
-            {/* HUD Interface */}
-            <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-30">
-                <div className="flex flex-col items-center space-y-4">
-                    <div className={`backdrop-blur-xl border rounded-2xl px-8 py-4 shadow-2xl transition-all duration-500 ${darkMode
-                        ? 'bg-black/30 border-gray-700'
-                        : 'bg-white/30 border-gray-300'
-                        }`}>
-                        <div className="flex items-center space-x-8">
-                            <div className="flex items-center space-x-3">
-                                <div className="relative">
-                                    <div className={`w-3 h-3 rounded-full animate-pulse ${darkMode ? 'bg-gradient-to-r from-gray-400 to-gray-500' : 'bg-gradient-to-r from-gray-600 to-gray-700'
-                                        }`} />
-                                    <div className={`absolute inset-0 rounded-full animate-ping opacity-20 ${darkMode ? 'bg-gray-400' : 'bg-gray-600'
-                                        }`} />
-                                </div>
-                                <span className={`text-sm font-light tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'
-                                    }`}>
-                                    SYSTEM READY
-                                </span>
-                            </div>
-                            <div className={`w-px h-6 ${darkMode ? 'bg-gray-600' : 'bg-gray-400'
-                                }`} />
-                            <div className="flex items-center space-x-3">
-                                <div className="w-2.5 h-2.5 rounded-full bg-white animate-pulse" />
-                                <span className={`text-sm font-light tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'
-                                    }`}>
-                                    MONOCHROME
-                                </span>
-                            </div>
-                            <div className={`w-px h-6 ${darkMode ? 'bg-gray-600' : 'bg-gray-400'
-                                }`} />
-                            <div className={`text-sm font-light tracking-wider ${darkMode ? 'text-gray-400' : 'text-gray-600'
-                                }`}>
-                                60Hz @ 800×600
-                            </div>
-                            <div className={`w-px h-6 ${darkMode ? 'bg-gray-600' : 'bg-gray-400'
-                                }`} />
-                            <div className={`px-3 py-1.5 rounded-full border ${darkMode
-                                ? 'bg-white/10 border-gray-600'
-                                : 'bg-black/10 border-gray-400'
-                                }`}>
-                                <span className={`text-xs font-medium tracking-wider ${darkMode ? 'text-gray-300' : 'text-gray-700'
-                                    }`}>
-                                    {darkMode ? 'DARK_MODE' : 'LIGHT_MODE'}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="text-center space-y-2">
-                        <div className="flex items-center justify-center space-x-2">
-                            <div className={`w-2 h-2 rounded-full animate-pulse ${darkMode ? 'bg-gray-400' : 'bg-gray-600'
-                                }`} />
-                            <span className={`text-xs font-light tracking-wider animate-pulse ${darkMode ? 'text-gray-400' : 'text-gray-600'
-                                }`}>
-                                SCROLL FOR FULL EXPERIENCE
-                            </span>
-                            <div className={`w-2 h-2 rounded-full animate-pulse ${darkMode ? 'bg-gray-400' : 'bg-gray-600'
-                                }`} />
-                        </div>
-                        <p className={`text-xs font-extralight tracking-wider ${darkMode ? 'text-gray-500' : 'text-gray-500'
-                            }`}>
-                            Click white button to toggle dark mode
-                        </p>
-                    </div>
-                </div>
-            </div>
 
             {/* Bottom gradient fade */}
             <div className={`fixed bottom-0 left-0 w-full h-40 z-10 pointer-events-none transition-opacity duration-500 ${darkMode
