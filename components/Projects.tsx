@@ -721,7 +721,58 @@ export default function Projects() {
         };
     }, []);
 
+    /* =============================
+       3D BALL EFFECT
+    ============================== */
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
 
+        const handleMouseMove = (e: MouseEvent) => {
+            const { clientX, clientY } = e;
+            const { width, height, left, top } = container.getBoundingClientRect();
+
+            const x = ((clientX - left) / width - 0.5) * 2;
+            const y = ((clientY - top) / height - 0.5) * 2;
+
+            const intensity = 30;
+            const rotateY = x * 5;
+            const rotateX = -y * 5;
+
+            const gridCells = container.querySelectorAll(".grid-cell");
+            gridCells.forEach((cell, index) => {
+                const rect = cell.getBoundingClientRect();
+                const cellX = ((rect.left + rect.width / 2 - left) / width - 0.5) * 2;
+                const cellY = ((rect.top + rect.height / 2 - top) / height - 0.5) * 2;
+
+                const distance = Math.sqrt(cellX * cellX + cellY * cellY);
+                const sphereFactor = Math.cos((distance * Math.PI) / 2);
+
+                (cell as HTMLElement).style.transform = `
+          translate3d(${x * intensity * sphereFactor}px, ${y * intensity * sphereFactor}px, ${sphereFactor * 50}px)
+          rotateX(${rotateX * sphereFactor}deg)
+          rotateY(${rotateY * sphereFactor}deg)
+          scale(${0.9 + sphereFactor * 0.2})
+        `;
+
+                (cell as HTMLElement).style.opacity = `${0.3 + sphereFactor * 0.7}`;
+            });
+
+            gsap.to(container, {
+                rotationY: rotateY,
+                rotationX: rotateX,
+                transformPerspective: 1000,
+                duration: 0.5,
+                ease: "power2.out",
+            });
+        };
+
+        container.addEventListener("mousemove", handleMouseMove);
+
+        return () => {
+            container.removeEventListener("mousemove", handleMouseMove);
+        };
+    }, []);
 
     /* =============================
        ANIMATED BORDER DRAWING EFFECT
@@ -773,97 +824,97 @@ export default function Projects() {
     /* =============================
        3D THIN BOOK-LIKE PROJECT CARDS
     ============================== */
-    const scrollRef = useRef<HTMLDivElement>(null);
+    // const scrollRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        if (!scrollRef.current) return;
+    // useEffect(() => {
+    //     if (!scrollRef.current) return;
 
-        const cards = scrollRef.current.querySelectorAll(".book-card");
+    //     const cards = scrollRef.current.querySelectorAll(".book-card");
 
-        cards.forEach((card, index) => {
-            // Set initial 3D book styles
-            (card as HTMLElement).style.transformStyle = "preserve-3d";
-            (card as HTMLElement).style.transform = `perspective(1000px) rotateY(${index * 5}deg) translateZ(${index * 10}px)`;
+    //     cards.forEach((card, index) => {
+    //         // Set initial 3D book styles
+    //         (card as HTMLElement).style.transformStyle = "preserve-3d";
+    //         (card as HTMLElement).style.transform = `perspective(1000px) rotateY(${index * 5}deg) translateZ(${index * 10}px)`;
 
-            // Add page flipping effect on hover
-            card.addEventListener("mouseenter", () => {
-                gsap.to(card, {
-                    rotationY: 5,
-                    scale: 1.05,
-                    z: 50,
-                    duration: 0.8,
-                    ease: "power3.out",
-                });
+    //         // Add page flipping effect on hover
+    //         card.addEventListener("mouseenter", () => {
+    //             gsap.to(card, {
+    //                 rotationY: 5,
+    //                 scale: 1.05,
+    //                 z: 50,
+    //                 duration: 0.8,
+    //                 ease: "power3.out",
+    //             });
 
-                // Animate pages inside
-                const pages = (card as HTMLElement).querySelectorAll(".book-page");
-                pages.forEach((page, i) => {
-                    gsap.to(page, {
-                        rotationY: i * 2,
-                        x: i * 2,
-                        duration: 0.5,
-                        delay: i * 0.1,
-                        ease: "power2.out",
-                    });
-                });
-            });
+    //             // Animate pages inside
+    //             const pages = (card as HTMLElement).querySelectorAll(".book-page");
+    //             pages.forEach((page, i) => {
+    //                 gsap.to(page, {
+    //                     rotationY: i * 2,
+    //                     x: i * 2,
+    //                     duration: 0.5,
+    //                     delay: i * 0.1,
+    //                     ease: "power2.out",
+    //                 });
+    //             });
+    //         });
 
-            card.addEventListener("mouseleave", () => {
-                gsap.to(card, {
-                    rotationY: index * 5,
-                    scale: 1,
-                    z: index * 10,
-                    duration: 0.8,
-                    ease: "power3.out",
-                });
+    //         card.addEventListener("mouseleave", () => {
+    //             gsap.to(card, {
+    //                 rotationY: index * 5,
+    //                 scale: 1,
+    //                 z: index * 10,
+    //                 duration: 0.8,
+    //                 ease: "power3.out",
+    //             });
 
-                // Reset pages
-                const pages = (card as HTMLElement).querySelectorAll(".book-page");
-                pages.forEach((page) => {
-                    gsap.to(page, {
-                        rotationY: 0,
-                        x: 0,
-                        duration: 0.5,
-                        ease: "power2.out",
-                    });
-                });
-            });
-        });
+    //             // Reset pages
+    //             const pages = (card as HTMLElement).querySelectorAll(".book-page");
+    //             pages.forEach((page) => {
+    //                 gsap.to(page, {
+    //                     rotationY: 0,
+    //                     x: 0,
+    //                     duration: 0.5,
+    //                     ease: "power2.out",
+    //                 });
+    //             });
+    //         });
+    //     });
 
-        // Auto-scroll with parallax effect
-        const scrollContainer = scrollRef.current;
-        let scrollX = 0;
-        let animationId: number;
+    //     // Auto-scroll with parallax effect
+    //     const scrollContainer = scrollRef.current;
+    //     let scrollX = 0;
+    //     let animationId: number;
 
-        const animateScroll = () => {
-            scrollX -= 0.5;
-            if (scrollX <= -scrollContainer.scrollWidth / 2) {
-                scrollX = 0;
-            }
+    //     const animateScroll = () => {
+    //         scrollX -= 0.5;
+    //         if (scrollX <= -scrollContainer.scrollWidth / 2) {
+    //             scrollX = 0;
+    //         }
 
-            scrollContainer.style.transform = `translateX(${scrollX}px)`;
+    //         scrollContainer.style.transform = `translateX(${scrollX}px)`;
 
-            // Parallax effect for cards
-            cards.forEach((card, index) => {
-                const speed = 0.5 + (index % 3) * 0.1;
-                const parallaxX = scrollX * speed;
-                gsap.to(card, {
-                    x: parallaxX * 0.2,
-                    rotationY: parallaxX * 0.01,
-                    duration: 0.1,
-                    ease: "none",
-                });
-            });
+    //         // Parallax effect for cards
+    //         cards.forEach((card, index) => {
+    //             const speed = 0.5 + (index % 3) * 0.1;
+    //             const parallaxX = scrollX * speed;
+    //             gsap.to(card, {
+    //                 x: parallaxX * 0.2,
+    //                 rotationY: parallaxX * 0.01,
+    //                 duration: 0.1,
+    //                 ease: "none",
+    //             });
+    //         });
 
-            animationId = requestAnimationFrame(animateScroll);
-        };
+    //         animationId = requestAnimationFrame(animateScroll);
+    //     };
 
-        animateScroll();
+    //     animateScroll();
 
-        return () => {
-            cancelAnimationFrame(animationId);
-        };
-    }, []);
+    //     return () => {
+    //         cancelAnimationFrame(animationId);
+    //     };
+    // }, []);
 
     /* =============================
        ANIMATED ROTATING BALL SECTION
@@ -895,8 +946,8 @@ export default function Projects() {
                 {/* Grid Container with spherical layout - REDUCED GRID SIZE */}
                 <div className="absolute inset-0 overflow-hidden">
                     {/* Main grid with spherical distortion - FEWER SQUARES (12x6 instead of 16x8) */}
-                    {/* <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 opacity-40">
-                        {Array.from({ length: 12 * 6 }).map((_, i) => {
+                    <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 opacity-40">
+                        {/* {Array.from({ length: 12 * 6 }).map((_, i) => {
                             const row = Math.floor(i / 12);
                             const col = i % 12;
                             const centerX = 5.5;
@@ -941,8 +992,8 @@ export default function Projects() {
                                     }}
                                 />
                             );
-                        })}
-                    </div> */}
+                        })} */}
+                    </div>
                 </div>
 
                 {/* Typing Text - Centered with 3D effect */}
@@ -956,23 +1007,7 @@ export default function Projects() {
                     >
                         <div
                             className="text-[4rem] md:text-[7rem] lg:text-[9rem] xl:text-[12rem] font-black leading-[0.9] tracking-tight"
-                            style={{
-                                textShadow: `
-                                0 1px 0 #ccc,
-                                0 2px 0 #c9c9c9,
-                                0 3px 0 #bbb,
-                                0 4px 0 #b9b9b9,
-                                0 5px 0 #aaa,
-                                0 6px 1px rgba(0,0,0,.1),
-                                0 0 5px rgba(0,0,0,.1),
-                                0 1px 3px rgba(0,0,0,.3),
-                                0 3px 5px rgba(0,0,0,.2),
-                                0 5px 10px rgba(0,0,0,.25),
-                                0 10px 10px rgba(0,0,0,.2),
-                                0 20px 20px rgba(0,0,0,.15)
-                            `,
-                                transform: "translateZ(50px)",
-                            }}
+
                         >
                             <span className="text-white relative">
                                 {displayText}
@@ -1175,6 +1210,7 @@ export default function Projects() {
                     </div>
                 </div>
             </div>
+
 
             {/* Global Animations */}
 
