@@ -38,7 +38,7 @@ export default function Header() {
         <header className="fixed top-0 left-0 w-full z-[1000] pt-[2.4rem] px-[4rem] flex justify-between items-start pointer-events-none text-dark dark:text-light transition-colors duration-500">
 
             {/* Logo */}
-            <div className="absolute left-1/2 top-[2.7rem] -translate-x-1/2 w-[10rem] pointer-events-auto">
+            <div className="absolute left-1/2 top-[2.7rem] -translate-x-1/2 w-[5rem] pointer-events-auto">
                 <img
                     src={logo}
                     alt="Logo"
@@ -50,7 +50,7 @@ export default function Header() {
             {/* Nav */}
             <nav className="pointer-events-auto flex flex-col gap-[1rem]">
                 {/* About */}
-                <a href="#about" className="group relative flex items-center gap-[1.8rem]">
+                <a href="#about" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
@@ -62,7 +62,7 @@ export default function Header() {
                 </a>
 
                 {/* Contacts */}
-                <a href="#contacts" className="group relative flex items-center gap-[1.8rem]">
+                <a href="#contacts" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
@@ -74,7 +74,7 @@ export default function Header() {
                 </a>
 
                 {/* FAQ */}
-                <a href="#faq" className="group relative flex items-center gap-[1.8rem]">
+                <a href="#faq" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
