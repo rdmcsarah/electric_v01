@@ -1569,7 +1569,7 @@ export default function InteractiveOldPC() {
             </div>
 
             {/* Fullscreen Video Overlay */}
-            {showVideo && (
+            {/* {showVideo && (
                 <div
                     ref={videoContainerRef}
                     className="fixed inset-0 z-[9999] bg-black w-[100dvw] h-[100dvh]"
@@ -1584,8 +1584,55 @@ export default function InteractiveOldPC() {
                         className="w-full h-full object-cover"
                     />
                 </div>
+            )} */}
+// Fullscreen Video Overlay - Updated version
+            {showVideo && (
+                <div
+                    ref={videoContainerRef}
+                    className="fixed inset-0 z-[9999] bg-black w-[100dvw] h-[100dvh]"
+                    onClick={(e) => {
+                        // Allow user to click to play if autoplay fails
+                        if (overlayVideoRef.current && overlayVideoRef.current.paused) {
+                            overlayVideoRef.current.play().catch(console.warn);
+                        }
+                    }}
+                >
+                    <video
+                        ref={overlayVideoRef}
+                        src="/glitch.mp4"
+                        muted
+                        autoPlay
+                        playsInline
+                        onEnded={handleVideoEnded}
+                        className="w-full h-full object-cover"
+                        preload="auto"
+                        // Add these important attributes for mobile
+                        webkit-playsinline="true"
+                        x5-playsinline="true"
+                        x5-video-player-type="h5"
+                        x5-video-player-fullscreen="true"
+                        // Add this to prevent iOS controls
+                        controls={false}
+                    />
+                    {/* Optional: Add a play button overlay for mobile */}
+                    <div className="absolute inset-0 flex items-center justify-center md:hidden">
+                        <button
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                if (overlayVideoRef.current) {
+                                    overlayVideoRef.current.play().catch(console.warn);
+                                }
+                            }}
+                            className="bg-white/20 backdrop-blur-sm rounded-full p-4 hover:bg-white/30 transition-all"
+                            aria-label="Play video"
+                        >
+                            <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M8 5v14l11-7z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             )}
-
             <section className="relative z-0">
                 {showProjects && <Projects />}
             </section>
