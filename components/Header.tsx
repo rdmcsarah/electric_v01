@@ -50,7 +50,7 @@ export default function Header() {
             {/* Nav */}
             <nav className="pointer-events-auto flex flex-col gap-[1rem]">
                 {/* About */}
-                <a href="#about" className="group relative flex items-center gap-[1.8rem] text-gray-300">
+                {/* <a href="#about" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
@@ -59,10 +59,10 @@ export default function Header() {
                     <span className="font-mono text-[1.7rem] group-hover:translate-x-2 transition-transform duration-300">
                         About us
                     </span>
-                </a>
+                </a> */}
 
                 {/* Contacts */}
-                <a href="#contacts" className="group relative flex items-center gap-[1.8rem] text-gray-300">
+                {/* <a href="#contacts" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
@@ -71,10 +71,10 @@ export default function Header() {
                     <span className="font-mono text-[1.7rem] group-hover:translate-x-2 transition-transform duration-300">
                         Contacts
                     </span>
-                </a>
+                </a> */}
 
                 {/* FAQ */}
-                <a href="#faq" className="group relative flex items-center gap-[1.8rem] text-gray-300">
+                {/* <a href="#faq" className="group relative flex items-center gap-[1.8rem] text-gray-300">
                     <div className="absolute left-0 bottom-0 h-[1.2px] bg-current scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 w-full"></div>
                     <div className="relative w-[2.2rem] h-[2.2rem] flex items-center justify-center">
                         <div className="absolute w-full h-full border border-current/40 rounded-full"></div>
@@ -83,7 +83,7 @@ export default function Header() {
                     <span className="font-mono text-[1.7rem] group-hover:translate-x-2 transition-transform duration-300">
                         FAQ
                     </span>
-                </a>
+                </a> */}
             </nav>
 
             {/* Theme */}

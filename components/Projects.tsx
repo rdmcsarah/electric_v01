@@ -895,7 +895,7 @@ export default function Projects() {
                 {/* Grid Container with spherical layout - REDUCED GRID SIZE */}
                 <div className="absolute inset-0 overflow-hidden">
                     {/* Main grid with spherical distortion - FEWER SQUARES (12x6 instead of 16x8) */}
-                    <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 opacity-40">
+                    {/* <div className="absolute inset-0 grid grid-cols-12 grid-rows-6 opacity-40">
                         {Array.from({ length: 12 * 6 }).map((_, i) => {
                             const row = Math.floor(i / 12);
                             const col = i % 12;
@@ -942,7 +942,7 @@ export default function Projects() {
                                 />
                             );
                         })}
-                    </div>
+                    </div> */}
                 </div>
 
                 {/* Typing Text - Centered with 3D effect */}
