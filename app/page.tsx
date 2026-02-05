@@ -30,7 +30,7 @@ export default function Home() {
   /* -------------------- Render -------------------- */
   return (
     <ThemeProvider>
-      {/* {loading && <Preloader />} */}
+      {loading && <Preloader />}
       {/* <Preloader /> */}
       <Header />
 
